@@ -20,14 +20,12 @@ namespace BBC.Pages.BBC
 
         public string GetMainArticleTitle()
         {
-            new Waits().ElementExists(TitleOfMainArticleBy);
             new Waits().ElementIsVisible(TitleOfMainArticleBy);
             return TitleOfMainArticle.Text;
         }
 
         public List<string> GetTitlesOfSecondaryArticles()
         {
-            new Waits().ElementExists(TitlesOfSecondaryArticlesListBy);
             new Waits().ElementIsVisible(TitlesOfSecondaryArticlesListBy);
             return TitlesOfSecondaryArticlesList.Select(title => title.Text).ToList();
         }

@@ -12,28 +12,30 @@ namespace BBC.Steps
     [Binding]
     public sealed class Actions
     {
+        [When(@"I open News page")]
+        public void WhenIOpenNewsPage()
+        {
+            new BbcMainPage().OpenNewsPage();
+        }
+
         [When(@"I look for articles by headline article category using Search bar")]
         public void WhenILookForArticlesByHeadlineArticleCategoryUsingSearchBar()
         {
             new NewsPage().FindArticlesByCategoryUsingSearchBar();
         }
 
-        [When(@"I go to Do you have a question for BBC news\?")]
-        public void WhenIGoToDoYouHaveAQuestionForBBCNews()
+        [When(@"I go to (.*) page using Search bar")]
+        public void WhenIGoToPageUsingSearchBar(string pageName)
         {
-            string doYouHaveQuestionTitle = "Do you have a question for BBC News?";
-            new BbcMainPage().FindArticleUsingSearchBar(doYouHaveQuestionTitle);
-            new FoundArticlesBySearchBarPage().OpenArticleByTitle(doYouHaveQuestionTitle);
+            new BbcMainPage().FindArticleUsingSearchBar(pageName);
+            new FoundArticlesBySearchBarPage().OpenArticleByTitle(pageName);
         }
 
         [When(@"I fill the question field with (.*) characters of Lorem ipsum")]
         public void WhenIFillTheQuestionFieldWithCharactersOfLoremIpsum(int numberOfCharacters)
         {
-            new BasePage().OpenNewTab();
-            new BasePage().GoToUrl(ConfigurationManager.AppSettings["LoremIpsumUrl"]);
-            string generetedText = new LoremIpsumMainPage().GeneratesNumberOfCharactersOfLoremIpsum(numberOfCharacters);
-            new BasePage().CloseLastTab();
-            new DoYouHaveQuestionPage().FillQuestionField(generetedText);
+            new DoYouHaveQuestionPage().FillQuestionField(
+                new LoremIpsumMainPage().GetGeneratedLoremIpsumTextFromSeparateTab(numberOfCharacters));
         }
 
         [When(@"I fill fields with user contact info")]
@@ -47,9 +49,11 @@ namespace BBC.Steps
         [When(@"I take a screenshot")]
         public void WhenITakeAScreenshot()
         {
-            new WorkWithFiles().CreateFolder(WorkWithFiles.BbcScreenShots);
-            new WorkWithFiles().ClearFolder(WorkWithFiles.BbcScreenShots);
-            new WorkWithFiles().GetScreenshot();
+            string BbcScreenShots = ConfigurationManager.AppSettings["ScreenShotsFolder"];
+            WorkWithFiles WorkWithFiles = new WorkWithFiles();
+            WorkWithFiles.CreateFolderIfNotCreated(BbcScreenShots);
+            WorkWithFiles.ClearFolder(BbcScreenShots);
+            WorkWithFiles.GetScreenshot();
         }
 
         [When(@"I click on Submit button")]

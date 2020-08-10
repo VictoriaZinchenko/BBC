@@ -123,7 +123,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I have gone to BBC main page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.And("I have opened News page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I open News page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title"});
@@ -175,7 +175,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I have gone to BBC main page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 18
- testRunner.And("I have opened News page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I open News page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 19
  testRunner.Then("name of the headline article is German officials \'very concerned\' by rising cases" +
@@ -216,10 +216,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I have gone to BBC main page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 23
- testRunner.And("I have opened News page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I open News page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 24
- testRunner.When("I look for articles by headline article category using Search bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I look for articles by headline article category using Search bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 25
  testRunner.Then("name of the first article is D-Block Europe", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -256,7 +256,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I have gone to BBC main page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 29
- testRunner.When("I go to Do you have a question for BBC news?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I go to Do you have a question for BBC News? page using Search bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 30
  testRunner.And(string.Format("I fill the question field with {0} characters of Lorem ipsum", someCharacters), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -336,7 +336,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I have gone to BBC main page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 44
- testRunner.When("I go to Do you have a question for BBC news?", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I go to Do you have a question for BBC News? page using Search bar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 45
  testRunner.And("I fill the question field with 100 characters of Lorem ipsum", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

@@ -1,8 +1,11 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 using SeleniumExtras.PageObjects;
 using System.Linq;
 using TechTalk.SpecFlow;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace BBC.Base
 {
@@ -19,7 +22,13 @@ namespace BBC.Base
         [BeforeScenario]
         public static void SetUpDriver()
         {
-            Driver = new ChromeDriver();
+            Driver = ConfigurationManager.AppSettings["Browser"] switch
+            {
+                "Chrome" => new ChromeDriver(),
+                "FireFox" => new FirefoxDriver(),
+                "IE" => new InternetExplorerDriver(),
+                _ => throw new System.NotImplementedException(),
+            };
             Driver.Manage().Window.Maximize();
         }
 

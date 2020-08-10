@@ -3,6 +3,7 @@ using BBC.UtilityClasses;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BBC.Pages.BBC
 {
@@ -24,20 +25,15 @@ namespace BBC.Pages.BBC
             QuestionField.SendKeys(text);
         }
 
-        public void FillFormWithUserInformation(List<string> userInfoList, List<string> fieldsList)
-        {
-            for (int i = 0; i < fieldsList.Count; i++)
-            {
-                Driver.FindElement(By.XPath(string.Format(UserContactField, fieldsList[i])))
-                    .SendKeys(userInfoList[i]);
-            }
-        }
+        public void FillFormWithUserInformation(List<string> userInfoList, List<string> fieldsList) =>
+            fieldsList.Select((field, index) => new { userInfo = userInfoList[index], field})
+                .ToList().ForEach(list => Driver.FindElement(By.XPath(string.Format(UserContactField, list.field)))
+                    .SendKeys(list.userInfo));
 
         public void ClickOnSubmitButton() => SubmitButton.Click();
 
         public bool IsErrorPresentForEmptyField(string nameOfEmptyField)
         {
-            new Waits().ElementExists(ErrorMessageBy);
             new Waits().ElementIsVisible(ErrorMessageBy);
             return Driver.FindElement(By.XPath(string.Format(UserContactField, nameOfEmptyField))).
                GetAttribute("class").Equals("text-input--error__input")

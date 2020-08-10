@@ -2,37 +2,35 @@
 using OpenQA.Selenium;
 using System.IO;
 using System.Linq;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace BBC.UtilityClasses
 {
     class WorkWithFiles
     {
-        public const string BbcScreenShots = "BbcScreenShots";
+        private string ScreenShotsFolderPath = ConfigurationManager.AppSettings["ScreenShotsFolderPath"];
 
-        private  DirectoryInfo DirInfo(string folderName) => new DirectoryInfo(@$"C:\{folderName}");
-
-        public bool IsScreenShotsFolderEmpty() => IsFolderEmpty(BbcScreenShots);
+        private DirectoryInfo GetDirInfo(string folderName) => new DirectoryInfo(ScreenShotsFolderPath);
 
         public void GetScreenshot()
         {
             var screenshotCapableDriver = BasePage.Driver as ITakesScreenshot;
             screenshotCapableDriver.GetScreenshot()
-                .SaveAsFile(@$"C:\{BbcScreenShots}\{NumberOfFolderFiles(BbcScreenShots) + 1}.png");
+                .SaveAsFile(Path.Combine(ScreenShotsFolderPath, 
+                $"{GetNumberOfFolderFiles(ConfigurationManager.AppSettings["ScreenShotsFolder"]) + 1}.png"));
         }
 
-        public void CreateFolder(string folderName)
+        public void CreateFolderIfNotCreated(string folderName)
         {
-            if (!DirInfo(folderName).Exists)
+            if (!GetDirInfo(folderName).Exists)
             {
-                DirInfo(folderName).Create();
+                GetDirInfo(folderName).Create();
             }
         }
 
-        public void ClearFolder(string folderName) => DirInfo(folderName).GetFiles().ToList()
+        public void ClearFolder(string folderName) => GetDirInfo(folderName).GetFiles().ToList()
             .ForEach(file => file.Delete());
 
-        private bool IsFolderEmpty(string folderName) => DirInfo(folderName).GetFiles() == null;
-
-        private int NumberOfFolderFiles(string folderName) => DirInfo(folderName).GetFiles().Count();
+        public int GetNumberOfFolderFiles(string folderName) => GetDirInfo(folderName).GetFiles().Count();
     }
 }

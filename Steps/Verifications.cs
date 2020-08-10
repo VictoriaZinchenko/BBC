@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace BBC.Steps
 {
@@ -41,7 +42,8 @@ namespace BBC.Steps
         [Then(@"I can find this screenshot on my PC")]
         public void ThenICanFindThisScreenshotOnMyPC()
         {
-            Assert.IsFalse(new WorkWithFiles().IsScreenShotsFolderEmpty(),
+            Assert.IsTrue(new WorkWithFiles().GetNumberOfFolderFiles
+                (ConfigurationManager.AppSettings["ScreenShotsFolder"]) != 0,
                 "There is no screenshot on this PC");
         }
 

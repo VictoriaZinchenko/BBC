@@ -1,6 +1,7 @@
 ﻿using BBC.Base;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace BBC.Pages.LoremIpsum
 {
@@ -14,7 +15,17 @@ namespace BBC.Pages.LoremIpsum
         private IWebElement RadioButtonBytes;
 
         //For A-Z characters, etc. UTF-8 uses only one byte per character.
-        public string GeneratesNumberOfCharactersOfLoremIpsum(int numberOfCharacters)
+
+        public string GetGeneratedLoremIpsumTextFromSeparateTab(int numberOfCharacters)
+        {
+            OpenNewTab();
+            GoToUrl(ConfigurationManager.AppSettings["LoremIpsumUrl"]);
+            string generetedText = GenerateNumberOfLoremIpsumCharacters(numberOfCharacters);
+            CloseLastTab();
+            return generetedText;
+        }
+
+        private string GenerateNumberOfLoremIpsumCharacters(int numberOfCharacters)
         {
             InputBox.Clear();
             InputBox.SendKeys(numberOfCharacters.ToString());
