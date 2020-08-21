@@ -8,29 +8,26 @@ namespace BBC.UtilityClasses
 {
     class WorkWithFiles
     {
-        private string ScreenShotsFolderPath = ConfigurationManager.AppSettings["ScreenShotsFolderPath"];
+        private DirectoryInfo GetDirInfo(string folderPath) => new DirectoryInfo(folderPath);
 
-        private DirectoryInfo GetDirInfo(string folderName) => new DirectoryInfo(ScreenShotsFolderPath);
-
-        public void GetScreenshot()
+        public void GetScreenshot(string folderPath, string fileName)
         {
             var screenshotCapableDriver = BasePage.Driver as ITakesScreenshot;
             screenshotCapableDriver.GetScreenshot()
-                .SaveAsFile(Path.Combine(ScreenShotsFolderPath, 
-                $"{GetNumberOfFolderFiles(ConfigurationManager.AppSettings["ScreenShotsFolder"]) + 1}.png"));
+                .SaveAsFile(Path.Combine(folderPath, $"{fileName}.png"));
         }
 
-        public void CreateFolderIfNotCreated(string folderName)
+        public void CreateFolderIfNotCreated(string folderPath)
         {
-            if (!GetDirInfo(folderName).Exists)
+            if (!GetDirInfo(folderPath).Exists)
             {
-                GetDirInfo(folderName).Create();
+                GetDirInfo(folderPath).Create();
             }
         }
 
-        public void ClearFolder(string folderName) => GetDirInfo(folderName).GetFiles().ToList()
+        public void ClearFolder(string folderPath) => GetDirInfo(folderPath).GetFiles().ToList()
             .ForEach(file => file.Delete());
 
-        public int GetNumberOfFolderFiles(string folderName) => GetDirInfo(folderName).GetFiles().Count();
+        public int GetNumberOfFolderFiles(string folderPath) => GetDirInfo(folderPath).GetFiles().Count();
     }
 }

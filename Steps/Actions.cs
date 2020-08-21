@@ -49,11 +49,11 @@ namespace BBC.Steps
         [When(@"I take a screenshot")]
         public void WhenITakeAScreenshot()
         {
-            string BbcScreenShots = ConfigurationManager.AppSettings["ScreenShotsFolder"];
+            string BbcScreenShotsFolderPath = ConfigurationManager.AppSettings["ScreenShotsFolderPath"];
             WorkWithFiles WorkWithFiles = new WorkWithFiles();
-            WorkWithFiles.CreateFolderIfNotCreated(BbcScreenShots);
-            WorkWithFiles.ClearFolder(BbcScreenShots);
-            WorkWithFiles.GetScreenshot();
+            WorkWithFiles.CreateFolderIfNotCreated(BbcScreenShotsFolderPath);
+            WorkWithFiles.ClearFolder(BbcScreenShotsFolderPath);
+            WorkWithFiles.GetScreenshot(BbcScreenShotsFolderPath, $"{WorkWithFiles.GetNumberOfFolderFiles(BbcScreenShotsFolderPath) + 1}");
         }
 
         [When(@"I click on Submit button")]

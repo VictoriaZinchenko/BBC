@@ -21,12 +21,12 @@ namespace BBC.Pages.BBC
 
         public void FillQuestionField(string text)
         {
-            new Waits().ElementToBeClickable(SubmitButton);
+            Waits.ElementToBeClickable(SubmitButton);
             QuestionField.SendKeys(text);
         }
 
         public void FillFormWithUserInformation(List<string> userInfoList, List<string> fieldsList) =>
-            fieldsList.Select((field, index) => new { userInfo = userInfoList[index], field})
+            fieldsList.Select((field, index) => new { userInfo = userInfoList[index], field })
                 .ToList().ForEach(list => Driver.FindElement(By.XPath(string.Format(UserContactField, list.field)))
                     .SendKeys(list.userInfo));
 
@@ -34,7 +34,7 @@ namespace BBC.Pages.BBC
 
         public bool IsErrorPresentForEmptyField(string nameOfEmptyField)
         {
-            new Waits().ElementIsVisible(ErrorMessageBy);
+            Waits.ElementIsVisible(ErrorMessageBy);
             return Driver.FindElement(By.XPath(string.Format(UserContactField, nameOfEmptyField))).
                GetAttribute("class").Equals("text-input--error__input")
                && ErrorMessage.Text.Equals($"{nameOfEmptyField} can't be blank");

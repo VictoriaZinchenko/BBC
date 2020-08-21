@@ -79,3 +79,4 @@ C:\Users\Vika Zinchenko\source\repos\BBC\obj\Debug\BBC.csproj.CoreCompileInputs.
 C:\Users\Vika Zinchenko\source\repos\BBC\obj\Debug\BBC.csproj.CopyComplete
 C:\Users\Vika Zinchenko\source\repos\BBC\obj\Debug\BBC.dll
 C:\Users\Vika Zinchenko\source\repos\BBC\obj\Debug\BBC.pdb
+C:\Users\Vika Zinchenko\source\repos\BBC\obj\Debug\BBC.csprojAssemblyReference.cache

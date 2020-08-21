@@ -1,6 +1,7 @@
 ﻿using BBC.Base;
 using BBC.UtilityClasses;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using SeleniumExtras.PageObjects;
 
 namespace BBC.Pages.BBC
@@ -16,16 +17,17 @@ namespace BBC.Pages.BBC
 
         public void OpenNewsPage()
         {
-            new Waits().ElementToBeClickable(NewsButtonOfMenuLine);
-            NewsButtonOfMenuLine.Click();
-            new Waits().UrlContains("/news");
+            Waits.ElementToBeClickable(NewsButtonOfMenuLine);
+            JsClick(NewsButtonOfMenuLine);
+            Waits.UrlContains("/news");
+            CloseSignInWindowIfItIsPresent();
         }
 
         public void FindArticleUsingSearchBar(string navigationText)
         {
             SearchBar.SendKeys(navigationText);
             ButtonSearchBar.Click();
-            new Waits().UrlContains("/search");
+            Waits.UrlContains("/search");
         }
     }
 }

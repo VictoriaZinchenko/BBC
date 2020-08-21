@@ -20,19 +20,19 @@ namespace BBC.Pages.BBC
 
         public string GetMainArticleTitle()
         {
-            new Waits().ElementIsVisible(TitleOfMainArticleBy);
+            Waits.ElementIsVisible(TitleOfMainArticleBy);
             return TitleOfMainArticle.Text;
         }
 
         public List<string> GetTitlesOfSecondaryArticles()
         {
-            new Waits().ElementIsVisible(TitlesOfSecondaryArticlesListBy);
+            Waits.ElementIsVisible(TitlesOfSecondaryArticlesListBy);
             return TitlesOfSecondaryArticlesList.Select(title => title.Text).ToList();
         }
 
         public void FindArticlesByCategoryUsingSearchBar()
         {
-            new Waits().ElementIsVisible(CategoryOfHeadlineArticleBy);
+            Waits.ElementIsVisible(CategoryOfHeadlineArticleBy);
             new BbcMainPage().FindArticleUsingSearchBar(CategoryOfHeadlineArticle.Text);
         }
     }

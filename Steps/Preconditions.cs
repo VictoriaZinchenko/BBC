@@ -12,6 +12,7 @@ namespace BBC.Steps
         public void GivenIGoToBBCMainPage()
         {
             new BasePage().GoToUrl(ConfigurationManager.AppSettings["BbcUrl"]);
+            new BasePage().CloseSignInWindowIfItIsPresent();
         }
     }
 }

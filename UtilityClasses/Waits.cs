@@ -5,20 +5,20 @@ using OpenQA.Selenium.Support.UI;
 
 namespace BBC.UtilityClasses
 {
-    public class Waits
+    public static class Waits
     {
-        WebDriverWait Wait = new WebDriverWait(BasePage.Driver, new TimeSpan(0, 0, 30));
+        static WebDriverWait Wait = new WebDriverWait(BasePage.Driver, new TimeSpan(0, 0, 30));
 
-        internal void UrlContains(string partOfUrl)
+        internal static void UrlContains(string partOfUrl)
            => Wait.Until(ExpectedConditions.UrlContains(partOfUrl));
 
-        internal void ElementToBeClickable(IWebElement element) =>
-            Wait.Until(ExpectedConditions.ElementToBeClickable(element)); 
+        internal static void ElementToBeClickable(IWebElement element) 
+            => Wait.Until(ExpectedConditions.ElementToBeClickable(element)); 
 
-        internal void ElementExists(By locator) 
+        internal static void ElementExists(By locator) 
             => Wait.Until(ExpectedConditions.ElementExists(locator));
 
-        internal void ElementIsVisible(By locator) =>
-            Wait.Until(ExpectedConditions.ElementIsVisible(locator));
+        internal static void ElementIsVisible(By locator) 
+            => Wait.Until(ExpectedConditions.ElementIsVisible(locator));
     }
 }

@@ -12,8 +12,8 @@ namespace BBC.Pages.LoremIpsum
 
         public string GetLoremIpsumGeneratedText()
         {
-            new Waits().UrlContains("/feed/");
-            new Waits().ElementIsVisible(GeneratedTextOfLoremIpsumBy);
+            Waits.UrlContains("/feed/");
+            Waits.ElementIsVisible(GeneratedTextOfLoremIpsumBy);
             return GeneratedTextOfLoremIpsum.Text;
         }
     }

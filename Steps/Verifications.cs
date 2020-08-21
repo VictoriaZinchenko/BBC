@@ -43,7 +43,7 @@ namespace BBC.Steps
         public void ThenICanFindThisScreenshotOnMyPC()
         {
             Assert.IsTrue(new WorkWithFiles().GetNumberOfFolderFiles
-                (ConfigurationManager.AppSettings["ScreenShotsFolder"]) != 0,
+                (ConfigurationManager.AppSettings["ScreenShotsFolderPath"]) != 0,
                 "There is no screenshot on this PC");
         }
 

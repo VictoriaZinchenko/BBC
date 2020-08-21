@@ -14,14 +14,14 @@ namespace BBC.Pages.BBC
 
         public string GetNameOfFirstArticleByCategory()
         {
-            new Waits().ElementToBeClickable(FirstArticleUsingSearch);
+            Waits.ElementToBeClickable(FirstArticleUsingSearch);
             return FirstArticleUsingSearch.Text;
         }
 
         public void OpenArticleByTitle(string title)
         {
             IWebElement article = Driver.FindElement(By.XPath(string.Format(ArticleByTitle, title)));
-            new Waits().ElementToBeClickable(article);
+            Waits.ElementToBeClickable(article);
             article.Click();
         }
     }
