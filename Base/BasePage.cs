@@ -44,8 +44,8 @@ namespace BBC.Base
             Driver.Manage().Window.Maximize();
         }
 
-        [AfterScenario]
-        public static void TearDownDriverAndGetScreenShoot()
+        [AfterScenario (Order = 1)]
+        public static void GetScreenShootOfFailedTest()
         {
             if (TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Failed)
             {
@@ -54,7 +54,11 @@ namespace BBC.Base
                 WorkWithFiles.CreateFolderIfNotCreated(folderPath);
                 WorkWithFiles.GetScreenshot(folderPath, $"{ScenarioContext.Current.ScenarioInfo.Title} {DateTime.Now.ToString("yyyy_MM_dd")}");
             }
+        }
 
+        [AfterScenario(Order = 2)]
+        public static void TearDownDriver()
+        {
             Driver.Quit();
         }
 
@@ -77,17 +81,10 @@ namespace BBC.Base
 
         public void CloseSignInWindowIfItIsPresent()
         {
-            try
+            if (Driver.IsDisplayed(CloseBtnOfSignInWindowBy))
             {
-                if (Driver.FindElements(CloseBtnOfSignInWindowBy).Count != 0)
-                {
-                    Waits.ElementIsVisible(CloseBtnOfSignInWindowBy);
-                    CloseBtnOfSignInWindow.Click();
-                }
-            }
-            catch (NoSuchElementException)
-            {
-
+                    JsClick(CloseBtnOfSignInWindow);
+                    Waits.InvisibilityOfElementLocated(CloseBtnOfSignInWindowBy);
             }
         }
 
